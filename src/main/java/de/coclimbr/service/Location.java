@@ -1,4 +1,4 @@
-package de.coclimbr;
+package de.coclimbr.service;
 
 public enum Location {
     BRIGHTSITE,
