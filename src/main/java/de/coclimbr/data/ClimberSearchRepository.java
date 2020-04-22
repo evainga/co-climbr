@@ -1,7 +1,8 @@
 package de.coclimbr.data;
 
-import de.coclimbr.service.ClimberSearch;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-public interface ClimberSearchRepository extends ReactiveCrudRepository<ClimberSearch, String> {
+import de.coclimbr.service.ClimberSearch;
+
+public interface ClimberSearchRepository extends ReactiveMongoRepository<ClimberSearch, String> {
 }

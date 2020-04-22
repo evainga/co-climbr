@@ -4,25 +4,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import de.coclimbr.service.ClimberLevel;
 import de.coclimbr.service.ClimberSearch;
 import de.coclimbr.service.ClimberSearchService;
+import de.coclimbr.service.Location;
 
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 class ClimberSearchControllerTest {
 
+    private static final ClimberSearch CLIMBER_SEARCH = ClimberSearch.builder()
+            .initialisingClimberId(123L)
+            .date(LocalDateTime.now())
+            .location(Location.BERTABLOCK)
+            .level(ClimberLevel.ADVANCED)
+            .build();
+
     private final ClimberSearchService climberSearchService = mock(ClimberSearchService.class);
     private final ClimberSearchController climberSearchController = new ClimberSearchController(climberSearchService);
-
-    @BeforeEach
-    void init() {
-        when(climberSearchService.getAllSearches()).thenReturn(Flux.just(ClimberSearch.builder().level(ClimberLevel.ADVANCED).build()));
-    }
 
     @Test
     void testWithoutEntry() {
@@ -35,11 +39,11 @@ class ClimberSearchControllerTest {
         StepVerifier.create(climberSearchFlux)
                 .verifyComplete();
     }
-    
+
     @Test
     void testHasEntry() {
         //Given
-        when(climberSearchService.getAllSearches()).thenReturn(Flux.just(ClimberSearch.builder().level(ClimberLevel.ADVANCED).build()));
+        when(climberSearchService.getAllSearches()).thenReturn(Flux.just(CLIMBER_SEARCH));
 
         //When
         Flux<ClimberSearch> climberSearchFlux = climberSearchController.showAllClimberSearches();

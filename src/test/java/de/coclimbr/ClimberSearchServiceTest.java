@@ -6,29 +6,27 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.coclimbr.data.ClimberSearchRepository;
+import de.coclimbr.service.ClimberLevel;
 import de.coclimbr.service.ClimberSearch;
 import de.coclimbr.service.ClimberSearchService;
 import de.coclimbr.service.Location;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 class ClimberSearchServiceTest {
-    private static final ClimberSearch CLIMBER_SEARCH = ClimberSearch.builder().date(LocalDateTime.now()).initialisingClimber(Climber.builder().build()).location(Location.BERTABLOCK).build();
+    
+    private static final ClimberSearch CLIMBER_SEARCH = ClimberSearch.builder().date(LocalDateTime.now()).initialisingClimberId(123L).location(Location.BERTABLOCK).level(ClimberLevel.ADVANCED).build();
     private final ClimberSearchRepository climberSearchRepository = mock(ClimberSearchRepository.class);
 
-    @BeforeEach
-    void init() {
-        when(climberSearchRepository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
-    }
-
     @Test
-    void createClimber() {
+    void createClimberSearch() {
         //Given
+        when(climberSearchRepository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
         var service = new ClimberSearchService(climberSearchRepository);
 
         //When
@@ -41,30 +39,18 @@ class ClimberSearchServiceTest {
     }
 
     @Test
-    void createEmptyClimberWhenNoInput() {
+    void getAllSearches() {
         //Given
-        ClimberSearchRepository climberSearchRepository = mock(ClimberSearchRepository.class);
+        when(climberSearchRepository.findAll()).thenReturn(Flux.just(CLIMBER_SEARCH, CLIMBER_SEARCH));
         var service = new ClimberSearchService(climberSearchRepository);
 
         //When
-        Mono<ClimberSearch> climberSearch = service.createSearch(ClimberSearch.builder().build());
+        Flux<ClimberSearch> climberSearches = service.getAllSearches();
 
         //Then
-        assertThat(climberSearch).isNull();
+        StepVerifier.create(climberSearches)
+                .assertNext(search -> assertThat(search.getLocation()).isEqualTo(Location.BERTABLOCK))
+                .assertNext(search -> assertThat(search.getLocation()).isEqualTo(Location.BERTABLOCK))
+                .verifyComplete();
     }
-
-    @Test
-    void createEmptyClimberWhenOnlyOneInputIsMissing() {
-        //Given
-        ClimberSearchRepository climberSearchRepository = mock(ClimberSearchRepository.class);
-        var service = new ClimberSearchService(climberSearchRepository);
-
-        //When
-        Mono<ClimberSearch> climberSearch = service.createSearch(ClimberSearch.builder().location(Location.BERTABLOCK).initialisingClimber(Climber.builder().build()).build());
-
-        //Then
-        assertThat(climberSearch).isNull();
-    }
-
-
 }

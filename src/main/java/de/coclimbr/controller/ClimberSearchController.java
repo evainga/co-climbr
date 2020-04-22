@@ -1,10 +1,18 @@
 package de.coclimbr.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import de.coclimbr.service.ClimberSearch;
 import de.coclimbr.service.ClimberSearchService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -21,7 +29,7 @@ public class ClimberSearchController {
 
     @PostMapping("/searches")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<ClimberSearch> createEntry(@RequestBody ClimberSearch climberSearch) {
+    public Mono<ClimberSearch> createEntry(@Valid @RequestBody ClimberSearch climberSearch) {
         return climberSearchService.createSearch(climberSearch);
     }
 }
