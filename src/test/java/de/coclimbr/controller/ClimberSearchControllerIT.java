@@ -35,12 +35,7 @@ class ClimberSearchControllerIT {
     @Autowired
     private WebTestClient webClient;
 
-    private static final ClimberSearch CLIMBER_SEARCH = ClimberSearch.builder()
-            .initialisingClimberId(123L)
-            .date(LocalDateTime.now())
-            .location(Location.BERTABLOCK)
-            .level(ClimberLevel.ADVANCED)
-            .build();
+    private static final ClimberSearch CLIMBER_SEARCH = new ClimberSearch("123", LocalDateTime.now(), Location.BERTABLOCK, ClimberLevel.ADVANCED, null);
 
     @Test
     void testCreateInvalidClimberSearchRequest() {

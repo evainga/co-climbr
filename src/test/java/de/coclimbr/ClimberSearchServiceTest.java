@@ -19,8 +19,8 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 class ClimberSearchServiceTest {
-    
-    private static final ClimberSearch CLIMBER_SEARCH = ClimberSearch.builder().date(LocalDateTime.now()).initialisingClimberId(123L).location(Location.BERTABLOCK).level(ClimberLevel.ADVANCED).build();
+
+    private static final ClimberSearch CLIMBER_SEARCH = new ClimberSearch("123", LocalDateTime.now(), Location.BERTABLOCK, ClimberLevel.ADVANCED, null);
     private final ClimberSearchRepository climberSearchRepository = mock(ClimberSearchRepository.class);
 
     @Test

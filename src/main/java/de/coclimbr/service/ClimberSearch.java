@@ -4,28 +4,37 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Builder
-@Value
-@RequiredArgsConstructor
+import lombok.Data;
+
+@Data
+@JsonIgnoreProperties(value = "id", allowGetters = true)
+@Document
 public class ClimberSearch {
 
     @Id
-    long id;
+    private String id;
 
     @NonNull
-    Long initialisingClimberId;
+    private String initialisingClimberId;
     @NonNull
-    LocalDateTime date;
+    private LocalDateTime date;
     @NonNull
-    Location location;
+    private Location location;
     @NonNull
-    ClimberLevel level;
+    private ClimberLevel level;
 
-    List<Long> joiningClimberIds;
+    private List<String> joiningClimberIds;
+
+    public ClimberSearch(String initialisingClimberId, LocalDateTime date, Location location, ClimberLevel level, List<String> joiningClimberIds) {
+        this.initialisingClimberId = initialisingClimberId;
+        this.date = date;
+        this.location = location;
+        this.level = level;
+        this.joiningClimberIds = joiningClimberIds;
+    }
 }

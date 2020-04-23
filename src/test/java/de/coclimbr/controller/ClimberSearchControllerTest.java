@@ -18,12 +18,7 @@ import reactor.test.StepVerifier;
 
 class ClimberSearchControllerTest {
 
-    private static final ClimberSearch CLIMBER_SEARCH = ClimberSearch.builder()
-            .initialisingClimberId(123L)
-            .date(LocalDateTime.now())
-            .location(Location.BERTABLOCK)
-            .level(ClimberLevel.ADVANCED)
-            .build();
+    private static final ClimberSearch CLIMBER_SEARCH = new ClimberSearch("123", LocalDateTime.now(), Location.BERTABLOCK, ClimberLevel.ADVANCED, null);
 
     private final ClimberSearchService climberSearchService = mock(ClimberSearchService.class);
     private final ClimberSearchController climberSearchController = new ClimberSearchController(climberSearchService);
@@ -35,6 +30,7 @@ class ClimberSearchControllerTest {
 
         //When
         Flux<ClimberSearch> climberSearchFlux = climberSearchController.showAllClimberSearches();
+
         //Then
         StepVerifier.create(climberSearchFlux)
                 .verifyComplete();
@@ -47,6 +43,7 @@ class ClimberSearchControllerTest {
 
         //When
         Flux<ClimberSearch> climberSearchFlux = climberSearchController.showAllClimberSearches();
+
         //Then
         StepVerifier.create(climberSearchFlux)
                 .assertNext(firstEntry -> assertThat(firstEntry.getLevel()).isEqualTo(ClimberLevel.ADVANCED))

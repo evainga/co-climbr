@@ -3,6 +3,7 @@ package de.coclimbr.controller;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class ClimberSearchController {
 
     private final ClimberSearchService climberSearchService;
 
-    @GetMapping(path = "/searches")
+    @GetMapping(path = "/searches", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<ClimberSearch> showAllClimberSearches() {
         return climberSearchService.getAllSearches();
     }
