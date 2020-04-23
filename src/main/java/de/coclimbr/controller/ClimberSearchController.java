@@ -23,7 +23,7 @@ public class ClimberSearchController {
 
     private final ClimberSearchService climberSearchService;
 
-    @GetMapping(path = "/searches", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    @GetMapping(path = "/searches", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_STREAM_JSON_VALUE })
     public Flux<ClimberSearch> showAllClimberSearches() {
         return climberSearchService.getAllSearches();
     }
