@@ -9,4 +9,6 @@ import lombok.Value;
 @RequiredArgsConstructor
 public class Climber {
     String name;
+
+
 }

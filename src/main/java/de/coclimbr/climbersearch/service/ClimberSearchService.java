@@ -1,8 +1,9 @@
-package de.coclimbr.service;
+package de.coclimbr.climbersearch.service;
 
 import org.springframework.stereotype.Component;
 
-import de.coclimbr.data.ClimberSearchRepository;
+import de.coclimbr.climbersearch.data.ClimberSearch;
+import de.coclimbr.climbersearch.data.ClimberSearchRepository;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -30,7 +31,7 @@ public class ClimberSearchService {
             return foundSearch.flatMap(search -> updateSearch(climberSearch, search));
         }
     }
-    
+
     public Flux<ClimberSearch> getAllSearches() {
         return climberSearchRepository.findAll();
     }

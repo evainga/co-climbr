@@ -1,4 +1,4 @@
-package de.coclimbr.service;
+package de.coclimbr.climbersearch.data;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,6 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import de.coclimbr.ClimberLevel;
+import de.coclimbr.Location;
 
 import lombok.Data;
 

@@ -1,3 +1,13 @@
+:docinfo:
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:highlightjs-theme: googlecode
+:toc: left
+:sectlinks:
+:linkattrs:
+:hide-uri-scheme:
+
 == Create a search
 
 operation::create-search[snippets='curl-request,http-request,http-response']

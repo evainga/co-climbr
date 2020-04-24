@@ -10,11 +10,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.coclimbr.data.ClimberSearchRepository;
-import de.coclimbr.service.ClimberLevel;
-import de.coclimbr.service.ClimberSearch;
-import de.coclimbr.service.ClimberSearchService;
-import de.coclimbr.service.Location;
+import de.coclimbr.climbersearch.data.ClimberSearch;
+import de.coclimbr.climbersearch.data.ClimberSearchRepository;
+import de.coclimbr.climbersearch.service.ClimberSearchService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

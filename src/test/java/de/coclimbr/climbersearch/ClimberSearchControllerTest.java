@@ -1,4 +1,4 @@
-package de.coclimbr.controller;
+package de.coclimbr.climbersearch;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -8,10 +8,11 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import de.coclimbr.service.ClimberLevel;
-import de.coclimbr.service.ClimberSearch;
-import de.coclimbr.service.ClimberSearchService;
-import de.coclimbr.service.Location;
+import de.coclimbr.ClimberLevel;
+import de.coclimbr.Location;
+import de.coclimbr.climbersearch.controller.ClimberSearchController;
+import de.coclimbr.climbersearch.data.ClimberSearch;
+import de.coclimbr.climbersearch.service.ClimberSearchService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

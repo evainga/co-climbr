@@ -1,4 +1,4 @@
-package de.coclimbr.controller;
+package de.coclimbr.climbersearch.controller;
 
 import javax.validation.Valid;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.coclimbr.service.ClimberSearch;
-import de.coclimbr.service.ClimberSearchService;
+import de.coclimbr.climbersearch.data.ClimberSearch;
+import de.coclimbr.climbersearch.service.ClimberSearchService;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;

@@ -1,4 +1,4 @@
-package de.coclimbr.controller;
+package de.coclimbr.climbersearch;
 
 import static org.mockito.Mockito.times;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -28,11 +28,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
-import de.coclimbr.data.ClimberSearchRepository;
-import de.coclimbr.service.ClimberLevel;
-import de.coclimbr.service.ClimberSearch;
-import de.coclimbr.service.ClimberSearchService;
-import de.coclimbr.service.Location;
+import de.coclimbr.ClimberLevel;
+import de.coclimbr.Location;
+import de.coclimbr.climbersearch.controller.ClimberSearchController;
+import de.coclimbr.climbersearch.data.ClimberSearch;
+import de.coclimbr.climbersearch.data.ClimberSearchRepository;
+import de.coclimbr.climbersearch.service.ClimberSearchService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
