@@ -1,0 +1,19 @@
+== Create a search
+
+operation::create-search[snippets='curl-request,http-request,http-response']
+
+== Get a search by id
+
+operation::get-search[snippets='curl-request,http-request,http-response,response-fields']
+
+== Delete a search by id
+
+operation::delete-search[snippets='curl-request,http-request,http-response']
+
+== Update a search
+
+operation::update-search[snippets='curl-request,http-request,http-response']
+
+== Get all searches
+
+operation::get-all-searches[snippets='curl-request,http-request,http-response,response-fields']
