@@ -9,8 +9,7 @@ import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import de.coclimbr.ClimberLevel;
-import de.coclimbr.Location;
+import de.coclimbr.climber.data.ClimberLevel;
 
 import lombok.Data;
 

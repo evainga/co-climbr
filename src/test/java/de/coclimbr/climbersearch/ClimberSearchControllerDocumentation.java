@@ -28,11 +28,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
-import de.coclimbr.ClimberLevel;
-import de.coclimbr.Location;
+import de.coclimbr.climber.data.ClimberLevel;
 import de.coclimbr.climbersearch.controller.ClimberSearchController;
 import de.coclimbr.climbersearch.data.ClimberSearch;
 import de.coclimbr.climbersearch.data.ClimberSearchRepository;
+import de.coclimbr.climbersearch.data.Location;
 import de.coclimbr.climbersearch.service.ClimberSearchService;
 
 import reactor.core.publisher.Flux;

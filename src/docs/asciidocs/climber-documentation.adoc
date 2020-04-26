@@ -1,0 +1,29 @@
+:docinfo:
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:highlightjs-theme: googlecode
+:toc: left
+:sectlinks:
+:linkattrs:
+:hide-uri-scheme:
+
+== Create a climber
+
+operation::create-climber[snippets='curl-request,http-request,http-response']
+
+== Get a climber by id
+
+operation::get-climber[snippets='curl-request,http-request,http-response,response-fields']
+
+== Delete a climber by id
+
+operation::delete-climber[snippets='curl-request,http-request,http-response']
+
+== Update a climber
+
+operation::update-climber[snippets='curl-request,http-request,http-response']
+
+== Get all climbers
+
+operation::get-all-climbers[snippets='curl-request,http-request,http-response,response-fields']

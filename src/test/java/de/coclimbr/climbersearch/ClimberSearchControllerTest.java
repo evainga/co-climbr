@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import de.coclimbr.ClimberLevel;
-import de.coclimbr.Location;
+import de.coclimbr.climber.data.ClimberLevel;
 import de.coclimbr.climbersearch.controller.ClimberSearchController;
 import de.coclimbr.climbersearch.data.ClimberSearch;
+import de.coclimbr.climbersearch.data.Location;
 import de.coclimbr.climbersearch.service.ClimberSearchService;
 
 import reactor.core.publisher.Flux;

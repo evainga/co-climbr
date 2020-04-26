@@ -1,4 +1,4 @@
-package de.coclimbr;
+package de.coclimbr.climbersearch.data;
 
 public enum Location {
     BRIGHTSITE,

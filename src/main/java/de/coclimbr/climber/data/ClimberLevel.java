@@ -1,4 +1,4 @@
-package de.coclimbr;
+package de.coclimbr.climber.data;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 

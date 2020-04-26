@@ -1,4 +1,4 @@
-package de.coclimbr;
+package de.coclimbr.climbersearch;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -10,8 +10,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.coclimbr.climber.data.ClimberLevel;
 import de.coclimbr.climbersearch.data.ClimberSearch;
 import de.coclimbr.climbersearch.data.ClimberSearchRepository;
+import de.coclimbr.climbersearch.data.Location;
 import de.coclimbr.climbersearch.service.ClimberSearchService;
 
 import reactor.core.publisher.Flux;
