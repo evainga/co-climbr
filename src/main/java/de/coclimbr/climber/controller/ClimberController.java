@@ -43,15 +43,15 @@ public class ClimberController {
         return climberService.deleteClimber(id);
     }
 
-    @PostMapping("/climbers/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Mono<Climber> updateClimber(@PathVariable String id, @Valid @RequestBody Climber climber) {
-        return climberService.updateClimber(id, climber);
-    }
-
     @PostMapping("/climbers")
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Climber> createClimber(@Valid @RequestBody Climber climber) {
         return climberService.createClimber(climber);
+    }
+
+    @PostMapping("/climbers/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<Climber> updateClimber(@PathVariable String id, @Valid @RequestBody Climber climber) {
+        return climberService.updateClimber(id, climber);
     }
 }

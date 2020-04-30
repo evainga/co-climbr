@@ -28,7 +28,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
+import de.coclimbr.climber.data.Climber;
 import de.coclimbr.climber.data.ClimberLevel;
+import de.coclimbr.climber.service.ClimberService;
 import de.coclimbr.climbersearch.controller.ClimberSearchController;
 import de.coclimbr.climbersearch.data.ClimberSearch;
 import de.coclimbr.climbersearch.data.ClimberSearchRepository;
@@ -40,15 +42,18 @@ import reactor.core.publisher.Mono;
 
 @ExtendWith({ RestDocumentationExtension.class, SpringExtension.class })
 @WebFluxTest(controllers = ClimberSearchController.class)
-@Import(ClimberSearchService.class)
+@Import({ ClimberSearchService.class })
 class ClimberSearchControllerDocumentation {
 
     private static final String SEARCH_ID = "999";
     private static final String INITIALISING_CLIMBER_ID = "123";
     private static final ClimberSearch CLIMBER_SEARCH = new ClimberSearch(INITIALISING_CLIMBER_ID, LocalDateTime.now(), Location.BERTABLOCK, ClimberLevel.ADVANCED, null);
+    private static final Climber CLIMBER = new Climber("climber name", ClimberLevel.ADVANCED);
 
     @MockBean
-    ClimberSearchRepository repository;
+    ClimberSearchRepository climberSearchRepository;
+    @MockBean
+    ClimberService climberService;
 
     @Autowired
     private WebTestClient webTestClient;
@@ -76,7 +81,8 @@ class ClimberSearchControllerDocumentation {
 
     @Test
     void testCreateClimberSearch() {
-        Mockito.when(repository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberSearchRepository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         webTestClient.post()
                 .uri("/searches")
@@ -94,15 +100,29 @@ class ClimberSearchControllerDocumentation {
                                 fieldWithPath("location").description("The location where a climber wants to go"),
                                 fieldWithPath("level").description("The level of the climber"),
                                 fieldWithPath("joiningClimberIds").description("The ids of other climbers who join"))));
-        ;
 
-        Mockito.verify(repository, times(1)).save(CLIMBER_SEARCH);
+        Mockito.verify(climberSearchRepository, times(1)).save(CLIMBER_SEARCH);
+    }
+
+    @Test
+    void testCreateClimberSearchWithInvalidClimberId() {
+        Mockito.when(climberSearchRepository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.empty());
+
+        webTestClient.post()
+                .uri("/searches")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(CLIMBER_SEARCH))
+                .exchange()
+                .expectStatus()
+                .isNotFound();
     }
 
     @Test
     void testUpdateClimberSearch() {
-        Mockito.when(repository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
-        Mockito.when(repository.findById(SEARCH_ID)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberSearchRepository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberSearchRepository.findById(SEARCH_ID)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         webTestClient.post()
                 .uri("/searches/" + SEARCH_ID)
@@ -121,12 +141,28 @@ class ClimberSearchControllerDocumentation {
                                 fieldWithPath("level").description("The level of the climber"),
                                 fieldWithPath("joiningClimberIds").description("The ids of other climbers who join"))));
 
-        Mockito.verify(repository, times(1)).save(CLIMBER_SEARCH);
+        Mockito.verify(climberSearchRepository, times(1)).save(CLIMBER_SEARCH);
     }
 
     @Test
+    void testUpdateClimberSearchWithInvalidClimberId() {
+        Mockito.when(climberSearchRepository.save(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberSearchRepository.findById(SEARCH_ID)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.empty());
+
+        webTestClient.post()
+                .uri("/searches/" + SEARCH_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(CLIMBER_SEARCH))
+                .exchange()
+                .expectStatus()
+                .isNotFound();
+    }
+
+
+    @Test
     void testGetClimberSearch() {
-        Mockito.when(repository.findById(SEARCH_ID)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        Mockito.when(climberSearchRepository.findById(SEARCH_ID)).thenReturn(Mono.just(CLIMBER_SEARCH));
 
         webTestClient.get()
                 .uri("/searches/" + SEARCH_ID)
@@ -142,12 +178,12 @@ class ClimberSearchControllerDocumentation {
                         fieldWithPath("level").description("The level of the climber"),
                         fieldWithPath("joiningClimberIds").description("The ids of other climbers who join"))));
 
-        Mockito.verify(repository, times(1)).findById(SEARCH_ID);
+        Mockito.verify(climberSearchRepository, times(1)).findById(SEARCH_ID);
     }
 
     @Test
     void testGetAllClimberSearches() {
-        Mockito.when(repository.findAll()).thenReturn(Flux.just(CLIMBER_SEARCH, CLIMBER_SEARCH));
+        Mockito.when(climberSearchRepository.findAll()).thenReturn(Flux.just(CLIMBER_SEARCH, CLIMBER_SEARCH));
 
         webTestClient.get()
                 .uri("/searches")
@@ -164,12 +200,12 @@ class ClimberSearchControllerDocumentation {
                                 fieldWithPath("[0].level").description("The level of the climber"),
                                 fieldWithPath("[0].joiningClimberIds").description("The ids of other climbers who join"))));
 
-        Mockito.verify(repository, times(1)).findAll();
+        Mockito.verify(climberSearchRepository, times(1)).findAll();
     }
 
     @Test
     void testDeleteClimberSearch() {
-        Mockito.when(repository.deleteById(SEARCH_ID)).thenReturn(Mono.empty());
+        Mockito.when(climberSearchRepository.deleteById(SEARCH_ID)).thenReturn(Mono.empty());
 
         webTestClient.delete()
                 .uri("/searches/" + SEARCH_ID)
@@ -179,7 +215,7 @@ class ClimberSearchControllerDocumentation {
                 .expectBody()
                 .consumeWith(document("delete-search"));
 
-        Mockito.verify(repository, times(1)).deleteById(SEARCH_ID);
+        Mockito.verify(climberSearchRepository, times(1)).deleteById(SEARCH_ID);
     }
 
 }

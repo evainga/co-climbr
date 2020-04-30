@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import de.coclimbr.climber.data.Climber;
 import de.coclimbr.climber.data.ClimberLevel;
+import de.coclimbr.climber.service.ClimberService;
 import de.coclimbr.climbersearch.controller.ClimberSearchController;
 import de.coclimbr.climbersearch.data.ClimberSearch;
 import de.coclimbr.climbersearch.data.Location;
@@ -20,11 +22,14 @@ import reactor.test.StepVerifier;
 
 class ClimberSearchControllerTest {
 
-    private static final ClimberSearch CLIMBER_SEARCH = new ClimberSearch("123", LocalDateTime.now(), Location.BERTABLOCK, ClimberLevel.ADVANCED, null);
+    private static final String INITIALISING_CLIMBER_ID = "123";
+    private static final ClimberSearch CLIMBER_SEARCH = new ClimberSearch(INITIALISING_CLIMBER_ID, LocalDateTime.now(), Location.BERTABLOCK, ClimberLevel.ADVANCED, null);
+    private static final Climber CLIMBER = new Climber("climber name", ClimberLevel.ADVANCED);
     private static final String ID = "123";
 
     private final ClimberSearchService climberSearchService = mock(ClimberSearchService.class);
-    private final ClimberSearchController climberSearchController = new ClimberSearchController(climberSearchService);
+    private final ClimberService climberService = mock(ClimberService.class);
+    private final ClimberSearchController climberSearchController = new ClimberSearchController(climberSearchService, climberService);
 
     @Test
     void testGetAllSearchesWhenWithoutSearch() {
@@ -84,6 +89,7 @@ class ClimberSearchControllerTest {
     void testUpdateSearch() {
         //Given
         when(climberSearchService.updateSearch(ID, CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         //When
         Mono<ClimberSearch> climberSearchFlux = climberSearchController.updateClimberSearch(ID, CLIMBER_SEARCH);
@@ -98,6 +104,7 @@ class ClimberSearchControllerTest {
     void testCreateSearch() {
         //Given
         when(climberSearchService.createSearch(CLIMBER_SEARCH)).thenReturn(Mono.just(CLIMBER_SEARCH));
+        when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         //When
         Mono<ClimberSearch> climberSearchFlux = climberSearchController.createClimberSearch(CLIMBER_SEARCH);
