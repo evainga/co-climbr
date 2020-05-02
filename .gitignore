@@ -1,8 +1,19 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
 */node_modules/*
 node_modules/*
 /test-output/
 HELP.md
+
 target/
+frontend/target
+backend/target
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -17,6 +28,7 @@ bin
 *.iws
 *.iml
 *.ipr
+*.log
 co-climb.iml
 .idea
 out/
@@ -30,6 +42,9 @@ out/
 
 # KDE directory preferences
 .directory
+
+# VSCode
+.vscode
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
