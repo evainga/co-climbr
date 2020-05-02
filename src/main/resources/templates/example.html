@@ -1,0 +1,64 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head xmlns:th="http://www.w3.org/1999/xhtml">
+    <title>Co-Climbr</title>
+
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+</head>
+
+<body>
+<div class="lead">
+    <strong>Name of Event:</strong>
+    <span th:text="${eventName}"></span>
+</div>
+<div id="contents">
+    <ul>
+        <li style="list-style-type:none" v-for="player in players">
+            <player-card
+                    v-bind:player="player"
+                    v-bind:key="player.id">
+            </player-card>
+        </li>
+    </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<script type="text/babel">
+    Vue.component('player-card', {
+        props: ['player'],
+        template: `
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">{{ player.name }}</h6>
+                <p class="card-text">
+                <div>{{ player.description }}</div>
+                </p>
+            </div>
+        </div>
+        `
+    });
+
+    var app = new Vue({
+        el: '#contents',
+        data: {
+            players: [
+                {
+                    id: "1",
+                    name: "Lionel Messi",
+                    description: "Argentina's superstar"
+                },
+                {
+                    id: "2",
+                    name: "Christiano Ronaldo",
+                    description: "World #1-ranked player from Portugal"
+                }
+            ]
+        }
+    });
+
+</script>
+</body>
+</html>
