@@ -49,6 +49,7 @@ class ClimberSearchControllerDocumentation {
     private static final String INITIALISING_CLIMBER_ID = "123";
     private static final ClimberSearch CLIMBER_SEARCH = new ClimberSearch(INITIALISING_CLIMBER_ID, LocalDateTime.now(), Location.BERTABLOCK, ClimberLevel.ADVANCED, null);
     private static final Climber CLIMBER = new Climber("climber name", ClimberLevel.ADVANCED);
+    private static final String API_SEARCHES = "/data/searches";
 
     @MockBean
     ClimberSearchRepository climberSearchRepository;
@@ -71,7 +72,7 @@ class ClimberSearchControllerDocumentation {
         String INVALID_CLIMBER_SEARCH = "climber search";
 
         webTestClient.post()
-                .uri("/searches")
+                .uri(API_SEARCHES)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(INVALID_CLIMBER_SEARCH))
                 .exchange()
@@ -85,7 +86,7 @@ class ClimberSearchControllerDocumentation {
         Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         webTestClient.post()
-                .uri("/searches")
+                .uri(API_SEARCHES)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(CLIMBER_SEARCH))
                 .exchange()
@@ -110,7 +111,7 @@ class ClimberSearchControllerDocumentation {
         Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.empty());
 
         webTestClient.post()
-                .uri("/searches")
+                .uri(API_SEARCHES)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(CLIMBER_SEARCH))
                 .exchange()
@@ -125,7 +126,7 @@ class ClimberSearchControllerDocumentation {
         Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         webTestClient.post()
-                .uri("/searches/" + SEARCH_ID)
+                .uri(API_SEARCHES + "/" + SEARCH_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(CLIMBER_SEARCH))
                 .exchange()
@@ -151,7 +152,7 @@ class ClimberSearchControllerDocumentation {
         Mockito.when(climberService.getClimber(INITIALISING_CLIMBER_ID)).thenReturn(Mono.empty());
 
         webTestClient.post()
-                .uri("/searches/" + SEARCH_ID)
+                .uri(API_SEARCHES + "/" + SEARCH_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(CLIMBER_SEARCH))
                 .exchange()
@@ -165,7 +166,7 @@ class ClimberSearchControllerDocumentation {
         Mockito.when(climberSearchRepository.findById(SEARCH_ID)).thenReturn(Mono.just(CLIMBER_SEARCH));
 
         webTestClient.get()
-                .uri("/searches/" + SEARCH_ID)
+                .uri(API_SEARCHES + "/" + SEARCH_ID)
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -186,7 +187,7 @@ class ClimberSearchControllerDocumentation {
         Mockito.when(climberSearchRepository.findAll()).thenReturn(Flux.just(CLIMBER_SEARCH, CLIMBER_SEARCH));
 
         webTestClient.get()
-                .uri("/searches")
+                .uri(API_SEARCHES)
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -208,7 +209,7 @@ class ClimberSearchControllerDocumentation {
         Mockito.when(climberSearchRepository.deleteById(SEARCH_ID)).thenReturn(Mono.empty());
 
         webTestClient.delete()
-                .uri("/searches/" + SEARCH_ID)
+                .uri("/data/searches/" + SEARCH_ID)
                 .exchange()
                 .expectStatus()
                 .isOk()
