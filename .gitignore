@@ -11,9 +11,20 @@ node_modules/*
 HELP.md
 
 target/
-frontend/target
+
 backend/target
 backend/src/main/resources/public/
+
+frontend/target
+frontend/dist/
+frontend/node/
+frontend/node_modules/
+frontend/npm-debug.log
+frontend/test-output
+frontend/tests/e2e/reports
+frontend/tests/unit/coverage
+frontend/yarn-error.log
+frontend/yarn.lock
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
@@ -85,4 +96,3 @@ fabric.properties
 
 # nyc test coverage
 .nyc_output/
-
