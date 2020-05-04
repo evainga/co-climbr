@@ -96,3 +96,4 @@ fabric.properties
 
 # nyc test coverage
 .nyc_output/
+/backend/src/main/resources/public/*
