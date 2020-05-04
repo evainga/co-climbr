@@ -13,6 +13,7 @@ HELP.md
 target/
 frontend/target
 backend/target
+backend/src/main/resources/public
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
@@ -29,7 +30,6 @@ bin
 *.iml
 *.ipr
 *.log
-co-climb.iml
 .idea
 out/
 
