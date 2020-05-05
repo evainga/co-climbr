@@ -42,6 +42,7 @@ class ClimberControllerDocumentation {
 
     private static final String CLIMBER_ID = "999";
     private static final Climber CLIMBER = new Climber("Bert", ClimberLevel.ADVANCED);
+    private static final String DATA_CLIMBERS = "/data/climbers";
 
     @MockBean
     ClimberRepository repository;
@@ -62,7 +63,7 @@ class ClimberControllerDocumentation {
         String INVALID_CLIMBER_CLIMBER = "climber climber";
 
         webTestClient.post()
-                .uri("/climbers")
+                .uri(DATA_CLIMBERS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(INVALID_CLIMBER_CLIMBER))
                 .exchange()
@@ -75,7 +76,7 @@ class ClimberControllerDocumentation {
         Mockito.when(repository.save(CLIMBER)).thenReturn(Mono.just(CLIMBER));
 
         webTestClient.post()
-                .uri("/climbers")
+                .uri(DATA_CLIMBERS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(CLIMBER))
                 .exchange()
@@ -97,7 +98,7 @@ class ClimberControllerDocumentation {
         Mockito.when(repository.findById(CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         webTestClient.post()
-                .uri("/climbers/" + CLIMBER_ID)
+                .uri(DATA_CLIMBERS + "/" + CLIMBER_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(CLIMBER))
                 .exchange()
@@ -118,7 +119,7 @@ class ClimberControllerDocumentation {
         Mockito.when(repository.findById(CLIMBER_ID)).thenReturn(Mono.just(CLIMBER));
 
         webTestClient.get()
-                .uri("/climbers/" + CLIMBER_ID)
+                .uri(DATA_CLIMBERS + "/" + CLIMBER_ID)
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -136,7 +137,7 @@ class ClimberControllerDocumentation {
         Mockito.when(repository.findAll()).thenReturn(Flux.just(CLIMBER, CLIMBER));
 
         webTestClient.get()
-                .uri("/climbers")
+                .uri(DATA_CLIMBERS)
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -155,7 +156,7 @@ class ClimberControllerDocumentation {
         Mockito.when(repository.deleteById(CLIMBER_ID)).thenReturn(Mono.empty());
 
         webTestClient.delete()
-                .uri("/climbers/" + CLIMBER_ID)
+                .uri(DATA_CLIMBERS + "/" + CLIMBER_ID)
                 .exchange()
                 .expectStatus()
                 .isOk()
