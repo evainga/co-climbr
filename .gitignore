@@ -16,6 +16,7 @@ backend/target
 backend/src/main/resources/public/
 
 frontend/target
+frontend/coverage
 frontend/dist/
 frontend/node/
 frontend/node_modules/
