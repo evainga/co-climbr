@@ -1,22 +1,22 @@
 <script>
-  import SearchCard from '@/components/search-card.vue'
-  import {mapActions, mapState} from 'vuex'
+import SearchCard from '@/components/SearchCard.vue'
+import { mapActions, mapState } from 'vuex'
 
-  export default {
-    name: 'searches',
-    components: {
-      SearchCard
-    },
-    computed: {
-      ...mapState(['searches'])
-    },
-    methods: {
-      ...mapActions(['fetchSearches'])
-    },
-    created() {
-      this.fetchSearches()
-    }
+export default {
+  name: 'searches',
+  components: {
+    SearchCard
+  },
+  computed: {
+    ...mapState(['searches'])
+  },
+  methods: {
+    ...mapActions(['fetchSearches'])
+  },
+  created () {
+    this.fetchSearches()
   }
+}
 </script>
 
 <template lang="pug">
@@ -24,7 +24,6 @@
     h1 Searches
     section
       search-card(v-for="search in searches", :search="search",  v-bind:key="search.id")
-
 
 </template>
 

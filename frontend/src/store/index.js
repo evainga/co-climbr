@@ -10,20 +10,20 @@ export default new Vuex.Store({
     searches: []
   },
   mutations: {
-    SET_CLIMBERS(state, data) {
+    SET_CLIMBERS (state, data) {
       state.climbers = data
     },
-    SET_SEARCHES(state, data) {
+    SET_SEARCHES (state, data) {
       state.searches = data
     }
   },
   actions: {
-    async fetchClimbers({commit}) {
-      const result = await axios.get(`http://localhost:8080/data/climbers`)
+    async fetchClimbers ({ commit }) {
+      const result = await axios.get('http://localhost:8080/data/climbers')
       commit('SET_CLIMBERS', result.data)
     },
-    async fetchSearches({commit}) {
-      const result = await axios.get(`http://localhost:8080/data/searches`)
+    async fetchSearches ({ commit }) {
+      const result = await axios.get('http://localhost:8080/data/searches')
       commit('SET_SEARCHES', result.data)
     }
   },

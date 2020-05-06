@@ -1,7 +1,7 @@
 /*
 import {expect} from 'chai'
 import {shallowMount} from '@vue/test-utils'
-import SearchCard from '@/components/search-card.vue'
+import SearchCard from '@/components/SearchCard.vue'
 
 describe('SearchCard.vue', () => {
   it('renders props.msg when passed', () => {

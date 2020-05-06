@@ -1,22 +1,22 @@
 <script>
-  import ClimberCard from '@/components/climber-card.vue'
-  import {mapActions, mapState} from 'vuex'
+import ClimberCard from '@/components/ClimberCard.vue'
+import { mapActions, mapState } from 'vuex'
 
-  export default {
-    name: 'climbers',
-    components: {
-      ClimberCard
-    },
-    computed: {
-      ...mapState(['climbers'])
-    },
-    methods: {
-      ...mapActions(['fetchClimbers'])
-    },
-    created() {
-      this.fetchClimbers()
-    }
+export default {
+  name: 'climbers',
+  components: {
+    ClimberCard
+  },
+  computed: {
+    ...mapState(['climbers'])
+  },
+  methods: {
+    ...mapActions(['fetchClimbers'])
+  },
+  created () {
+    this.fetchClimbers()
   }
+}
 </script>
 
 <template lang="pug">
@@ -24,8 +24,6 @@
     h1 Climbers searching
     section
       climber-card(v-for="climber in climbers", :climber="climber",  v-bind:key="climber.id")
-
-
 
 </template>
 
