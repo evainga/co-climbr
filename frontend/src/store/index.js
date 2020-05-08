@@ -19,11 +19,11 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchClimbers ({ commit }) {
-      const result = await axios.get('http://localhost:8080/data/climbers')
+      const result = await axios.get('h${process.env.VUE_APP_API_URL}/data/climbers')
       commit('SET_CLIMBERS', result.data)
     },
     async fetchSearches ({ commit }) {
-      const result = await axios.get('http://localhost:8080/data/searches')
+      const result = await axios.get('${process.env.VUE_APP_API_URL}/data/searches')
       commit('SET_SEARCHES', result.data)
     }
   },
