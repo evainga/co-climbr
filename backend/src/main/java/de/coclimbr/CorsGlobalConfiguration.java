@@ -11,7 +11,7 @@ public class CorsGlobalConfiguration implements WebFluxConfigurer {
     public void addCorsMappings(CorsRegistry corsRegistry) {
         corsRegistry
                 .addMapping("/data/*")
-                .allowedOrigins("http://localhost:8080")
+                .allowedOrigins("http://localhost:8080", "https://co-climbr.herokuapp.com")
                 .allowedMethods("*");
     }
 }
