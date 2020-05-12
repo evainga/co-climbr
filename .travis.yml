@@ -1,0 +1,12 @@
+language: java
+
+jdk:
+  - openjdk11
+
+script: mvn clean install
+
+services: mongodb
+
+cache:
+  directories:
+    - node_modules
