@@ -7,8 +7,4 @@ script: mvn clean install
 
 services: mongodb
 
-env:
-  - NODE_VERSION="12"
-
-before_install:
-  - nvm install $NODE_VERSION
+local_dir: /home/travis/build/evainga/co-climbr/backend/target
