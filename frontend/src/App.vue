@@ -13,7 +13,7 @@
 
 <script>
 
-if (process.env.NODE_ENV !== 'development' && location.protocol !== 'https:') {
+if (process.env.NODE_ENV === 'production' && location.protocol !== 'https:') {
   location.replace(`https:${location.href.substring(location.protocol.length)}`)
 }
 
