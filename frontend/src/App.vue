@@ -13,18 +13,18 @@
 
 <script>
 
-  if (process.env.NODE_ENV !== 'development' && location.protocol !== 'https:') {
-    location.replace(`https:${location.href.substring(location.protocol.length)}`);
-  }
+if (process.env.NODE_ENV !== 'development' && location.protocol !== 'https:') {
+  location.replace(`https:${location.href.substring(location.protocol.length)}`)
+}
 
-  export default {
-    name: 'app',
-    data () {
-      return {
-        msg: 'Welcome to your Vue.js powered Spring Boot App'
-      }
+export default {
+  name: 'app',
+  data () {
+    return {
+      msg: 'Welcome to your Vue.js powered Spring Boot App'
     }
   }
+}
 </script>
 
 <style>
