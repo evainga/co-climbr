@@ -1,9 +1,9 @@
 # co-climbr: Spring Boot meets VueJS
 
 ## Technologies
-Build & Deployment: Maven, Docker, Heroku
-Backend: Spring Boot 2, Spring REST Docs, Webflux, JUnit, AssertJ
-Frontend: VueJs, Pug Templates, Jest
+- Build & Deployment: Maven, Docker, Heroku
+- Backend: Spring Boot 2, Spring REST Docs, Webflux, JUnit, AssertJ
+- Frontend: VueJs, Pug Templates, Jest
 
 [![Build Status](https://travis-ci.org/evainga/co-climbr.svg?branch=master)](https://travis-ci.org/evainga/co-climbr)
 
@@ -22,6 +22,6 @@ Frontend: https://co-climbr.herokuapp.com
 
 ## Further links
 This project was mainly inspired by
-https://github.com/evainga/rememberbrall
-https://github.com/WTMBerlin/jscc2019
-https://github.com/jonashackt/spring-boot-vuejs
+- https://github.com/evainga/rememberbrall
+- https://github.com/WTMBerlin/jscc2019
+- https://github.com/jonashackt/spring-boot-vuejs
