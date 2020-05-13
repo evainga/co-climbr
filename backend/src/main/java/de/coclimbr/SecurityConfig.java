@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -37,6 +38,7 @@ public class SecurityConfig {
     */
 
     @Bean
+    @ConditionalOnProperty(value = "spring.profiles.active", havingValue = "production", matchIfMissing = false)
     public WebFilter httpsRedirectFilter() {
         return this::getWebFilter;
     }
