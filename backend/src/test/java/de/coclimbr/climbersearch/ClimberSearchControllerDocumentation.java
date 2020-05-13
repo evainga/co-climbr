@@ -28,6 +28,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
+import de.coclimbr.SecurityConfig;
 import de.coclimbr.climber.data.Climber;
 import de.coclimbr.climber.data.ClimberLevel;
 import de.coclimbr.climber.service.ClimberService;
@@ -42,7 +43,7 @@ import reactor.core.publisher.Mono;
 
 @ExtendWith({ RestDocumentationExtension.class, SpringExtension.class })
 @WebFluxTest(controllers = ClimberSearchController.class)
-@Import({ ClimberSearchService.class })
+@Import({ ClimberSearchService.class, SecurityConfig.class })
 class ClimberSearchControllerDocumentation {
 
     private static final String SEARCH_ID = "999";
