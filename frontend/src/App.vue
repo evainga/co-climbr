@@ -12,9 +12,6 @@
 </template>
 
 <script>
-console.log(process.env.NODE_ENV)
-console.log(location.protocol)
-console.log(process.env.NODE_ENV === 'production')
 
 if (location.protocol !== 'https:' && process.env.NODE_ENV === 'production') {
   location.replace(`https:${location.href.substring(location.protocol.length)}`)
@@ -24,7 +21,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to your Vue.js powered Spring Boot App'
+      msg: 'Welcome to co-climbr'
     }
   }
 }
