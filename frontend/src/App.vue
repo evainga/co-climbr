@@ -12,8 +12,11 @@
 </template>
 
 <script>
+console.log(process.env.NODE_ENV)
+console.log(location.protocol)
+console.log(process.env.NODE_ENV === 'production')
 
-if (process.env.NODE_ENV === 'production' && location.protocol !== 'https:') {
+if (location.protocol !== 'https:' && process.env.NODE_ENV === 'production') {
   location.replace(`https:${location.href.substring(location.protocol.length)}`)
 }
 
